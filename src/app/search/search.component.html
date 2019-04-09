@@ -1,0 +1,28 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div id="header">
+  <div id=search>
+    <h1>Bonjour ! Quel objet souhaiteriez vous crafter ?</h1>
+    <form class="example-form" (ngSubmit)="onSearch()">
+      <input [(ngModel)]="search" type="text" name="search" placeholder="Epée en acier..." />
+    </form>
+  </div>
+</div>
+
+<div id="result">
+  <div id="product" *ngIf="recipes">
+    <img src={{recipes[0].Product.Image}}>
+    <p>{{recipes[0].Product.Name}}</p>
+  </div>
+
+  <hr>
+
+  <div id="recipes" *ngIf="recipes">
+    <div id="recipe" *ngFor="let recipe of recipes">
+      <div id="recipe_ingredient" *ngFor="let recipe_line of recipe.Lines">
+        <img src="{{recipe_line.Ingredient.Image}}">
+        <p>{{recipe_line.Ingredient.Name}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
