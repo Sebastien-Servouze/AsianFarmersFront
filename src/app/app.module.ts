@@ -10,11 +10,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchComponent } from './search/search.component';
 import { ApiService } from './search/api.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ElementComponent } from './search/element/element.component';
+import { RecipeComponent } from './search/recipe/recipe.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SearchComponent
+    SearchComponent,
+    ElementComponent,
+    RecipeComponent
   ],
   imports: [
     BrowserModule,

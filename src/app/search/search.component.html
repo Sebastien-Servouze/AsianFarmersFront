@@ -9,20 +9,6 @@
 </div>
 
 <div id="result">
-  <div id="product" *ngIf="recipes">
-    <img src={{recipes[0].Product.Image}}>
-    <p>{{recipes[0].Product.Name}}</p>
-  </div>
-
-  <hr>
-
-  <div id="recipes" *ngIf="recipes">
-    <div id="recipe" *ngFor="let recipe of recipes">
-      <div id="recipe_ingredient" *ngFor="let recipe_line of recipe.Lines">
-        <img src="{{recipe_line.Ingredient.Image}}">
-        <p>{{recipe_line.Ingredient.Name}}</p>
-      </div>
-    </div>
-  </div>
+  <app-recipe *ngFor="let recipes of recipesTree; let i = index" (eventEmitter)="getClickedElement($event)" [recipes]=recipes [depth]=i></app-recipe>
 </div>
 

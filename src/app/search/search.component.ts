@@ -14,12 +14,13 @@ declare var particlesJS: any;
 export class SearchComponent implements OnInit
 {
   search: string;
-  recipes: Recipe[];
+  recipesTree: Recipe[][];
   formControl: FormControl;
 
   constructor(private api: ApiService, private router: Router, private activatedRoute: ActivatedRoute)
   {
     this.formControl = new FormControl();
+    this.recipesTree = [];
   }
 
   ngOnInit() 
@@ -32,7 +33,9 @@ export class SearchComponent implements OnInit
         // Si un produit à été transmis par url, on va chercher ce produit
         if (productName)
         {
-          this.loadRecipe(productName);
+          this.search = productName;
+          this.recipesTree = [];
+          this.loadRecipes(productName);
         }
       });
   }
@@ -42,19 +45,32 @@ export class SearchComponent implements OnInit
     this.router.navigate(["search/" + this.search]);
   }
 
-  loadRecipe(productName: string)
+  loadRecipes(productName: string, onSuccess = null)
   {
+    console.log("Recherche de recettes pour '" + productName + "'");
     this.api.getRecipes(productName).subscribe(recipes =>
       {
         if (recipes)
         {
-          this.recipes = recipes;
-          this.search = productName;
+          console.log(recipes.length + " recettes récupérée.");
+          this.recipesTree.push(recipes);
+
+          if (onSuccess)
+            onSuccess();
         }
         else
         {
           console.log("L'élément '" + productName + "' n'existe pas.");
         }
+      });
+  }
+
+  getClickedElement($event)
+  {
+    this.loadRecipes(this.recipesTree[$event.depth][$event.recipeIndex].Lines[$event.elementIndex].Ingredient.Name, () => 
+      {
+        if (this.recipesTree[$event.depth].length > 1)
+          this.recipesTree[$event.depth] = [this.recipesTree[$event.depth][$event.recipeIndex]];
       });
   }
 
