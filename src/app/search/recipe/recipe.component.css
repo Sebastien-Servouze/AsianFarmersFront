@@ -1,16 +1,13 @@
 #recipes
 {
-    width: 100%;
     margin-bottom: 100px;
     text-align: center;
     display: flex;
     justify-content: center;
-}
-
-#recipe_container
-{
-    flex: 1;
-    max-width: 600px;
+    overflow-x: auto;
+    white-space: nowrap;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
 }
 
 #recipe
@@ -26,4 +23,6 @@ h1
     justify-content: center;
     align-items: center;
     text-align: center;
+    min-width: 100px;
+    height: 210px;
 }
