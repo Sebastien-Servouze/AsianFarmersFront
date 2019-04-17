@@ -1,28 +1,29 @@
 #recipes
 {
-    margin-bottom: 100px;
     text-align: center;
-    display: flex;
-    justify-content: center;
+    margin: auto;
+    margin-bottom: 100px;
     overflow-x: auto;
     white-space: nowrap;
     width: 100%;
     -webkit-overflow-scrolling: touch;
 }
 
-#recipe
+#recipe_container
 {
     display: inline-block;
+}
+
+#recipe
+{
     text-align: center;
     background-color: #FFF;
 }
 
 h1
 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: inline-block;
     text-align: center;
     min-width: 100px;
-    height: 210px;
+    transform: translateY(-60px);
 }
