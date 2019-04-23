@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { Element } from '../../models/Element';
 
 @Component({
@@ -27,7 +27,7 @@ export class ElementComponent implements OnInit
     let event =
     {
       recipeIndex: this.recipeIndex,
-      elementIndex: this.elementIndex
+      elementIndex: this.elementIndex,
     }
     this.eventEmitter.emit(event);
   }

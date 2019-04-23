@@ -29,7 +29,7 @@ import { RecipeComponent } from './search/recipe/recipe.component';
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     ApiService

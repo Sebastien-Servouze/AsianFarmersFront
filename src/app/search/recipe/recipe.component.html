@@ -1,12 +1,13 @@
 <app-element *ngIf="depth == 0" [element]=recipes[0].Product [finalProduct]=true></app-element>
 
-<div id="recipes">
-
+<div class="recipes_{{depth}}" id="recipes">
+  <h1>
+    Etape {{depth + 1}}
+  </h1>
   <ng-container *ngFor="let recipe of recipes; let i = index">
-    <h1 *ngIf="i > 0">OU</h1>
+    <h2 *ngIf="i > 0">OU</h2>
     <div id="recipe_container">
       <div id="recipe">
-        <p>Recette {{i + 1}}</p>
         <ng-container *ngFor="let line of recipe.Lines; let j = index">
           <app-element (eventEmitter)="forwardClickedElement($event)" [element]=line.Ingredient [recipeIndex]=i [elementIndex]=j [quantity]=line.Quantity></app-element>
         </ng-container>

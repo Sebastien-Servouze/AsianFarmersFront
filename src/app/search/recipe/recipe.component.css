@@ -2,28 +2,41 @@
 {
     text-align: center;
     margin: auto;
-    margin-bottom: 100px;
     overflow-x: auto;
     white-space: nowrap;
     width: 100%;
     -webkit-overflow-scrolling: touch;
+    animation: fadein 1s;
 }
 
 #recipe_container
 {
     display: inline-block;
+    animation: fadein 1s;
 }
 
 #recipe
 {
     text-align: center;
-    background-color: #FFF;
+    animation: fadein 1s;
+    /* background-color: #FFF; */
 }
 
-h1
+h2
 {
     display: inline-block;
     text-align: center;
     min-width: 100px;
     transform: translateY(-60px);
+    animation: fadein 1s;
+}
+
+@keyframes fadein 
+{
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
 }

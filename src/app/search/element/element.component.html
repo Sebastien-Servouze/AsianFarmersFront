@@ -1,4 +1,4 @@
-<div id="element{{finalProduct ? '-final' : ''}}" (click)="onElementClick()">
+<div #elementRef id="element{{finalProduct ? '-final' : ''}}" (click)="onElementClick()">
   <img src={{element.Image}}>
   <p>{{element.Name}} {{quantity ? "x" + quantity : ""}}</p>
 </div>

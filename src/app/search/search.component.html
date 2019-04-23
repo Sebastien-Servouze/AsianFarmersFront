@@ -1,14 +1,15 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div id="header">
-  <div id=search>
-    <h1>Bonjour ! Quel objet souhaiteriez vous crafter ?</h1>
-    <form class="example-form" (ngSubmit)="onSearch()">
-      <input [(ngModel)]="search" type="text" name="search" placeholder="Epée en acier..." />
-    </form>
+<div id="main_container">
+  <div id="header">
+    <div id=search>
+      <h1>Bonjour ! Quel objet souhaiteriez vous crafter ?</h1>
+      <form class="example-form" (ngSubmit)="onSearch()">
+        <input [(ngModel)]="search" type="text" name="search" placeholder="Epée en acier..." />
+      </form>
+    </div>
+  </div>
+
+  <div id="result" *ngIf="recipesTree.length">
+    <app-recipe *ngFor="let recipes of recipesTree; let i = index" (eventEmitter)="getClickedElement($event)" [recipes]=recipes [depth]=i></app-recipe>
   </div>
 </div>
-
-<div id="result">
-  <app-recipe *ngFor="let recipes of recipesTree; let i = index" (eventEmitter)="getClickedElement($event)" [recipes]=recipes [depth]=i></app-recipe>
-</div>
-

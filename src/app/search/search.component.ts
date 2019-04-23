@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Recipe } from '../models/Recipe';
 import { FormControl } from '@angular/forms/'
 import { ApiService } from './api.service';
@@ -17,7 +17,7 @@ export class SearchComponent implements OnInit
   recipesTree: Recipe[][];
   formControl: FormControl;
 
-  constructor(private api: ApiService, private router: Router, private activatedRoute: ActivatedRoute)
+  constructor(private api: ApiService, private router: Router, private activatedRoute: ActivatedRoute, private cdRef: ChangeDetectorRef)
   {
     this.formControl = new FormControl();
     this.recipesTree = [];
@@ -25,6 +25,7 @@ export class SearchComponent implements OnInit
 
   ngOnInit() 
   {
+    particlesJS.load('header', 'assets/header-particles.json');
     // Abonnement à la route pour détecter les changement de paramètres
     this.activatedRoute.params.subscribe(params =>
       {
@@ -35,7 +36,7 @@ export class SearchComponent implements OnInit
         {
           this.search = productName;
           this.recipesTree = [];
-          this.loadRecipes(productName);
+          this.loadRecipes(productName, () => this.scrollToRecipe(0));
         }
       });
   }
@@ -65,12 +66,24 @@ export class SearchComponent implements OnInit
       });
   }
 
+  scrollToRecipe(depth: number)
+  {
+    // Raffraichissement de la fenêtre
+    this.cdRef.detectChanges();
+
+    // Scroll jusqu'à la nouvelle ligne de recette apparue
+    document.querySelectorAll('.recipes_' + (depth))[0].scrollIntoView({behavior: "smooth"});
+  }
+
   getClickedElement($event)
   {
     this.loadRecipes(this.recipesTree[$event.depth][$event.recipeIndex].Lines[$event.elementIndex].Ingredient.Name, () => 
       {
-        if (this.recipesTree[$event.depth].length > 1)
-          this.recipesTree[$event.depth] = [this.recipesTree[$event.depth][$event.recipeIndex]];
+        // Choix de la recette sélectionnée
+        // if (this.recipesTree[$event.depth].length > 1)
+        //   this.recipesTree[$event.depth] = [this.recipesTree[$event.depth][$event.recipeIndex]];
+
+        this.scrollToRecipe($event.depth);
       });
   }
 
